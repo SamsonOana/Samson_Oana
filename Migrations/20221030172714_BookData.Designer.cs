@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samson_Oana.Data;
 
@@ -11,9 +12,10 @@ using Samson_Oana.Data;
 namespace Samson_Oana.Migrations
 {
     [DbContext(typeof(Samson_OanaContext))]
-    partial class Samson_OanaContextModelSnapshot : ModelSnapshot
+    [Migration("20221030172714_BookData")]
+    partial class BookData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

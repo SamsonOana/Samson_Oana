@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samson_Oana.Data;
 
@@ -11,9 +12,10 @@ using Samson_Oana.Data;
 namespace Samson_Oana.Migrations
 {
     [DbContext(typeof(Samson_OanaContext))]
-    partial class Samson_OanaContextModelSnapshot : ModelSnapshot
+    [Migration("20221030143856_Authors")]
+    partial class Authors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,6 +53,10 @@ namespace Samson_Oana.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
@@ -76,46 +82,6 @@ namespace Samson_Oana.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("Samson_Oana.Models.BookCategory", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int>("BookID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BookID");
-
-                    b.HasIndex("CategoryID");
-
-                    b.ToTable("BookCategory");
-                });
-
-            modelBuilder.Entity("Samson_Oana.Models.Category", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("Samson_Oana.Models.Publisher", b =>
                 {
                     b.Property<int>("ID")
@@ -135,7 +101,7 @@ namespace Samson_Oana.Migrations
 
             modelBuilder.Entity("Samson_Oana.Models.Book", b =>
                 {
-                    b.HasOne("Samson_Oana.Models.Author", "Author")
+                    b.HasOne("Samson_Oana.Models.Author", null)
                         .WithMany("Books")
                         .HasForeignKey("AuthorID");
 
@@ -143,43 +109,12 @@ namespace Samson_Oana.Migrations
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
-                    b.Navigation("Author");
-
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("Samson_Oana.Models.BookCategory", b =>
-                {
-                    b.HasOne("Samson_Oana.Models.Book", "Book")
-                        .WithMany("BookCategories")
-                        .HasForeignKey("BookID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Samson_Oana.Models.Category", "Category")
-                        .WithMany("BookCategories")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Samson_Oana.Models.Author", b =>
                 {
                     b.Navigation("Books");
-                });
-
-            modelBuilder.Entity("Samson_Oana.Models.Book", b =>
-                {
-                    b.Navigation("BookCategories");
-                });
-
-            modelBuilder.Entity("Samson_Oana.Models.Category", b =>
-                {
-                    b.Navigation("BookCategories");
                 });
 
             modelBuilder.Entity("Samson_Oana.Models.Publisher", b =>

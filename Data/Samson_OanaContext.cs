@@ -17,5 +17,9 @@ namespace Samson_Oana.Data
         public DbSet<Samson_Oana.Models.Book> Book { get; set; } = default!;
 
         public DbSet<Samson_Oana.Models.Publisher> Publisher { get; set; }
+
+        public DbSet<Samson_Oana.Models.Author> Author { get; set; }
+
+        public DbSet<Samson_Oana.Models.Category> Category { get; set; }
     }
 }
