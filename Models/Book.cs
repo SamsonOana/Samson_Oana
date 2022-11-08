@@ -23,6 +23,8 @@ namespace Samson_Oana.Models
         public Publisher? Publisher { get; set; }
 
         public ICollection<BookCategory>? BookCategories { get; set; }
+
+        //public int? CategoryID { get; set; }
     }
 
 

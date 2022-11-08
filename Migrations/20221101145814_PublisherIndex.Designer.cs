@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samson_Oana.Data;
 
@@ -11,9 +12,10 @@ using Samson_Oana.Data;
 namespace Samson_Oana.Migrations
 {
     [DbContext(typeof(Samson_OanaContext))]
-    partial class Samson_OanaContextModelSnapshot : ModelSnapshot
+    [Migration("20221101145814_PublisherIndex")]
+    partial class PublisherIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,9 +56,6 @@ namespace Samson_Oana.Migrations
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6,2)");
 
@@ -73,8 +72,6 @@ namespace Samson_Oana.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
-
-                    b.HasIndex("CategoryID");
 
                     b.HasIndex("PublisherID");
 
@@ -144,10 +141,6 @@ namespace Samson_Oana.Migrations
                         .WithMany("Books")
                         .HasForeignKey("AuthorID");
 
-                    b.HasOne("Samson_Oana.Models.Category", null)
-                        .WithMany("Books")
-                        .HasForeignKey("CategoryID");
-
                     b.HasOne("Samson_Oana.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
@@ -189,8 +182,6 @@ namespace Samson_Oana.Migrations
             modelBuilder.Entity("Samson_Oana.Models.Category", b =>
                 {
                     b.Navigation("BookCategories");
-
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Samson_Oana.Models.Publisher", b =>
