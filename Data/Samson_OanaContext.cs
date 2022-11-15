@@ -21,5 +21,9 @@ namespace Samson_Oana.Data
         public DbSet<Samson_Oana.Models.Author> Author { get; set; }
 
         public DbSet<Samson_Oana.Models.Category> Category { get; set; }
+
+        public DbSet<Samson_Oana.Models.Member> Member { get; set; }
+
+        public DbSet<Samson_Oana.Models.Borrowing> Borrowing { get; set; }
     }
 }
